@@ -4,6 +4,10 @@ import pymysql.cursors
 from pprint import pprint as print
 
 
+app = Flask(__name__)
+
+my_todo = ["get money", 'get motion']
+
 conn = pymysql.connect(
     database="world",
     user="svassell2",
@@ -12,8 +16,6 @@ conn = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
-
-app = Flask(__name__)
 
 
 
