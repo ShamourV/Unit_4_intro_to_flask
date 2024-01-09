@@ -43,6 +43,6 @@ def todo_delete(todo_index):
    del my_todo[todo_index]
 cursor = conn.cursor()
 
-cursor.execute(f"DELETE FROM `todos` WHERE `id`")
+cursor.execute(f"DELETE FROM `todos` WHERE `id=todo_index`")
 cursor.close
 conn.commit
