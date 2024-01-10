@@ -3,10 +3,15 @@
 <head>
     <title>My Todo application</title>
     <style>
+    .complete {
+        text-decoration: line-through;
+        font-style: italic;
+    }
     body {
-        background: rgb(red, green, blue);
-        color: rgb(red, green, blue);
+        background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,145,1) 49%, rgba(0,212,255,1) 100%);
         font-family: ;
+        
     }
     
     </style>
@@ -14,18 +19,24 @@
 <body>
     <h1>Welcome to my todo application</h1>
     <ul>
-    {% for x in todos %}
-        <li>
-         {{x}}
-         <form method="POST" action="/delete_todos/{{loop.index0}}">
-            <input type="submit" value="Delete"
+    {% for todos in todo %}
+        <li if class="complete">
+         {{['description']}}
+         <form method="POST" action="/complete_todos/{{todos['id'] }}" class="d-inline float-end">
+            <input type="submit" value="complete" class="btn btn-sucess">
+        </form>
+        <form method="POST" action="/delete_todos/{{todos['id'] }}" class="d-inline float-end">
+            <input type="submit" value="Delete" class="btn btn-sucess">
         </form>
         </li>
+        <br>
     {%endfor%}
+    {% if todos['complete'] %}✅{%endif%}
     </ul>
     <form method="POST">
         <input name="new_todo">
         <input type="submit">
+
     </form>
     </body>
 </html>
