@@ -5,13 +5,16 @@
     <style>
     .complete {
         text-decoration: line-through;
-        font-style: italic;
+        text-decoration-color: rgb(0, 0, 0);
     }
     body {
         background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,145,1) 49%, rgba(0,212,255,1) 100%);
+        background: linear-gradient(90deg, rgb(172, 4, 178) 0%, rgb(189, 0, 82) 49%, rgb(181, 3, 12) 100%);
         font-family: ;
         
+    }
+    .bnSubmit{
+        background-color: rgb(197, 0, 16);
     }
     
     </style>
@@ -19,22 +22,29 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,145,1) 49%, rgba(
 <body>
     <h1>Welcome to my todo application</h1>
     <ul>
-    {% for todos in todo %}
-        <li if class="complete">
-         {{['description']}}
-         <form method="POST" action="/complete_todos/{{todos['id'] }}" class="d-inline float-end">
-            <input type="submit" value="complete" class="btn btn-sucess">
+    {% for todo in todos %}
+        <li  class= "{%if todo['complete']%} complete {% endif %}">
+         {{todo['description']}}
+         {% if todo['complete'] %} ✅ {%endif%}
+         {% if todo['complete'] == 0%}
+         <form method="POST" action="/complete_todo/{{todo['id'] }}" class="d-inline float-end">
+            <input type="submit" valu e="Complete" class="btn btn-sucess">
         </form>
-        <form method="POST" action="/delete_todos/{{todos['id'] }}" class="d-inline float-end">
+        {%endif%}
+        {%if todo['complete']%}
+        <form method="POST" action="/uncomplete_todo/{{todo['id'] }}" class="d-inline float-end">
+            <input type="submit" value="Uncomplete" class="btn btn-sucess">
+        </form>{%endif%}
+        <form method="POST" action="/delete_todo/{{todo['id'] }}" class="d-inline float-end">
             <input type="submit" value="Delete" class="btn btn-sucess">
         </form>
         </li>
         <br>
     {%endfor%}
-    {% if todos['complete'] %}✅{%endif%}
+    
     </ul>
     <form method="POST">
-        <input name="new_todo">
+        <input name="new_todos">
         <input type="submit">
 
     </form>
